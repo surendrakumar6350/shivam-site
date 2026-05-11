@@ -96,28 +96,31 @@ export default function CertificateClient() {
         <header
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-start",
             gap: 18,
             borderBottom: "2px solid #bdbdbd",
             paddingBottom: 10,
             flexWrap: "wrap",
+            justifyContent: "space-between",
           }}
         >
-          <div style={{ width: 140, display: "flex", justifyContent: "center" }}>
-            <img
-              src="https://d502jbuhuh9wk.cloudfront.net/orgData/5fbe028e0cf2052e17e4a57d/pages/assets/images/New-logo-of-CA.png"
-              alt="CA India"
-              style={{ width: 128, height: "auto", objectFit: "contain" }}
-            />
-          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 18, flex: 1, minWidth: 260 }}>
+            <div style={{ width: 140, display: "flex", justifyContent: "center" }}>
+              <img
+                src="https://d502jbuhuh9wk.cloudfront.net/orgData/5fbe028e0cf2052e17e4a57d/pages/assets/images/New-logo-of-CA.png"
+                alt="CA India"
+                style={{ width: 128, height: "auto", objectFit: "contain" }}
+              />
+            </div>
 
-          <div style={{ flex: 1, minWidth: 260 }}>
-            <h1 style={{ margin: 0, fontSize: "clamp(34px, 3.2vw, 52px)", fontWeight: 700, lineHeight: 1.06 }}>
-              Shivam Saini &amp; Associates
-            </h1>
-            <h2 style={{ margin: "8px 0 0", fontSize: "clamp(32px, 2.8vw, 44px)", fontWeight: 700, lineHeight: 1.05, color: "#1d2430" }}>
-              Chartered Accountants
-            </h2>
+            <div>
+              <h1 style={{ margin: 0, fontSize: "clamp(34px, 3.2vw, 52px)", fontWeight: 700, lineHeight: 1.06 }}>
+                Shivam Saini &amp; Associates
+              </h1>
+              <h2 style={{ margin: "8px 0 0", fontSize: "clamp(32px, 2.8vw, 44px)", fontWeight: 700, lineHeight: 1.05, color: "#1d2430" }}>
+                Chartered Accountants
+              </h2>
+            </div>
           </div>
         </header>
 
@@ -161,11 +164,7 @@ export default function CertificateClient() {
           </p>
 
           <p style={{ margin: "22px auto 0", maxWidth: 920, fontSize: "clamp(18px, 1.8vw, 35px)" }}>
-            S/o {cert?.fatherName ?? "-"}, a student of {cert?.course ?? "-"}, Semester-{cert?.semester ?? "-"}, from {cert?.collegeName ?? "-"}, has successfully completed an internship at Shivam Saini &amp; Associates, Chartered Accountants.
-          </p>
-
-          <p style={{ margin: "20px auto 0", maxWidth: 920, fontSize: "clamp(14px, 1.2vw, 23px)", color: "#303030" }}>
-            Certificate ID: {cert?._id ?? id}
+            S/o {cert?.fatherName ?? "-"}, a student of {cert?.course ?? "-"}, Semester-{cert?.semester ?? "-"}, from {cert?.collegeName ?? "-"}, affiliated to University of Rajasthan, has successfully completed an internship from 01/02/2026 to 28/02/2026 at Shivam Saini &amp; Associates, Chartered Accountants.
           </p>
         </article>
 
