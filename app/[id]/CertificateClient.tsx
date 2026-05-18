@@ -18,6 +18,7 @@ export default function CertificateClient() {
   const [cert, setCert] = useState<Cert | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [gender, setGender] = useState<"male" | "female" | "unknown">("unknown");
 
   useEffect(() => {
     if (!id) {
@@ -39,6 +40,23 @@ export default function CertificateClient() {
       .then((json) => {
         if (!mounted) return;
         setCert(json.data ?? null);
+
+        // Detect gender from the student's name using Genderize API
+        const studentName = json.data?.name;
+        if (studentName) {
+          const firstName = studentName.split(" ")[0];
+          return fetch(`https://api.genderize.io?name=${encodeURIComponent(firstName)}`)
+            .then((res) => res.json())
+            .then((genderData) => {
+              if (!mounted) return;
+              const detectedGender = genderData.gender === "male" ? "male" : genderData.gender === "female" ? "female" : "unknown";
+              setGender(detectedGender);
+            })
+            .catch(() => {
+              if (!mounted) return;
+              setGender("unknown");
+            });
+        }
       })
       .catch((err) => {
         if (!mounted) return;
@@ -164,7 +182,7 @@ export default function CertificateClient() {
           </p>
 
           <p style={{ margin: "22px auto 0", maxWidth: 920, fontSize: "clamp(18px, 1.8vw, 35px)" }}>
-            S/o {cert?.fatherName ?? "-"}, a student of {cert?.course ?? "-"}, Semester-{cert?.semester ?? "-"}, from {cert?.collegeName ?? "-"}, affiliated to University of Rajasthan, has successfully completed an internship from 01/02/2026 to 28/02/2026 at Shivam Saini &amp; Associates, Chartered Accountants.
+            {gender === "female" ? "D/o" : "S/o"} {cert?.fatherName ?? "-"}, a student of {cert?.course ?? "-"}, Semester-{cert?.semester ?? "-"}, from {cert?.collegeName ?? "-"}, affiliated to University of Rajasthan, has successfully completed an internship from 01/02/2026 to 28/02/2026 at Shivam Saini &amp; Associates, Chartered Accountants.
           </p>
         </article>
 
